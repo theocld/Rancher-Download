@@ -9,7 +9,7 @@ masters (HA). Finally, each virtual machine hosting kubernetes must at least
 minimum have 2 CPU cores and 5 GB of RAM for the needs of
 Rancher.
 You can configure and create a custom cluster by following the
-instructions on this [link](https://github.com/theocld/rke2-vagrant)
+instructions on this [link](https://github.com/theocld/rke2-vagrant).
 
 * A separate machine from our cluster, preferably virtual, allowing us
 to set up a load balancer (also instantiable from the previous link). This machine must have a static and public IP address.
@@ -27,7 +27,7 @@ the user interface. The next steps will allow you to configure a load
 Layer 4 (TCP) balancer in your machine
 
 * Install the NGINX package. The commands differ depending on your version of
-[Linux OS](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
+[Linux OS](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/).
 For example, for Ubuntu 20.04, run in your terminal the
 following commands:
 ```bash

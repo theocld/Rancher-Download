@@ -84,16 +84,15 @@ If all the prerequisites have been met, installing Rancher is a formality. You
 you will need to import the helm directory containing the rancher installation charts,
 install a certificate manager and finally start the installation by specifying as
 sets the IP address of our load balancer. First, just follow
-the [documentation](https://docs.ranchermanager.rancher.io/pages-for-
-subheaders/install-upgrade-on-a-kubernetes-cluster) of the site up to step 5 not included, with all
+the [documentation](https://docs.ranchermanager.rancher.io/pages-for-subheaders/install-upgrade-on-a-kubernetes-cluster) of the site up to step 5 not included, with all
 necessary commands. 
 
 Once the helm directory has been imported and cert manager has been installed, a final command
 is therefore to be launched before accessing the platform:
 ```bash
-helm install rancher rancher-&lt;CHART_REPO&gt;/rancher \
+helm install rancher rancher-<CHART_REPO>/rancher \
 --namespace cattle-system \
---set hostname=&lt;Public IP_LoadBalancer&gt;.sslip.io \
+--set hostname=<IP_LoadBalancer>.sslip.io \
 --set bootstrapPassword=admin
 ```
 Replace <CHART_REPO> by desired Rancher version: latest, stable, or

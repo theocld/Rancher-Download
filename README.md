@@ -27,17 +27,18 @@ the user interface. The next steps will allow you to configure a load
 Layer 4 (TCP) balancer in your machine
 
 * Install the NGINX package. The commands differ depending on your version of
-Linux OS. [Link](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
+[Linux OS](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
 For example, for Ubuntu 20.04, run in your terminal the
 following commands:
 ```bash
 sudo apt update
 sudo apt install nginx
-'''
+```
 
 *Copy and paste the following code into a text editor; replace the
 values of each <IP_NODE_X> by the IP addresses of your 3 kubernetes nodes
 ; finally save the file renaming it nginx.conf:
-'''
+
+```
 yo
-'''
+```

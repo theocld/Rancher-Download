@@ -35,10 +35,77 @@ sudo apt update
 sudo apt install nginx
 ```
 
-*Copy and paste the following code into a text editor; replace the
+* Copy and paste the following code into a text editor; replace the
 values of each <IP_NODE_X> by the IP addresses of your 3 kubernetes nodes
 ; finally save the file renaming it nginx.conf:
 
 ```
-yo
+load_module /usr/lib/nginx/modules/ngx_stream_module.so;
+worker_processes 4;
+worker_rlimit_nofile 40000;
+events {
+worker_connections 8192;
+}
+stream {
+upstream rancher_servers_http {
+least_conn;
+server &lt;IP_NODE_1&gt;:80 max_fails=3 fail_timeout=5s;
+server &lt;IP_NODE_2&gt;:80 max_fails=3 fail_timeout=5s;
+server &lt;IP_NODE_3&gt;:80 max_fails=3 fail_timeout=5s;
+}
+server {
+listen 80;
+proxy_pass rancher_servers_http;
+}
+upstream rancher_servers_https {
+least_conn;
+server &lt;IP_NODE_1&gt;:443 max_fails=3 fail_timeout=5s;
+server &lt;IP_NODE_2&gt;:443 max_fails=3 fail_timeout=5s;
+server &lt;IP_NODE_3&gt;:443 max_fails=3 fail_timeout=5s;
+}
+server {
+listen 443;
+proxy_pass rancher_servers_https;
+}
+}
 ```
+
+* Copy nginx.conf file to /etc/nginx/ folder
+
+* Charger les mises à jour en relançant le service nginx. Exécuter ces
+commandes dans le terminal :
+```bash
+sudo service nginx restart
+sudo nginx -s reload -t
+```
+
+## Install Rancher
+If all the prerequisites have been met, installing Rancher is a formality. You
+you will need to import the helm directory containing the rancher installation charts,
+install a certificate manager and finally start the installation by specifying as
+sets the IP address of our load balancer. First, just follow
+the [documentation](https://docs.ranchermanager.rancher.io/pages-for-
+subheaders/install-upgrade-on-a-kubernetes-cluster) of the site up to step 5 not included, with all
+necessary commands. 
+
+Once the helm directory has been imported and cert manager has been installed, a final command
+is therefore to be launched before accessing the platform:
+```bash
+helm install rancher rancher-&lt;CHART_REPO&gt;/rancher \
+--namespace cattle-system \
+--set hostname=&lt;Public IP_LoadBalancer&gt;.sslip.io \
+--set bootstrapPassword=admin
+```
+Replace <CHART_REPO> by desired Rancher version: latest, stable, or
+alpha.
+Replace <IP_LoadBalancer> by the public IP of your load balancer machine. This
+address will be used to access the Rancher UI and cannot be changed.
+Execute the command and wait a bit. You can watch live
+deployment using the command:
+```bash
+kubectl -n cattle-system rollout status deploy/rancher
+```
+
+If everything went well, an https address to access the interface
+user of your rancher installation will be given to you. All you have to do is
+get there!

@@ -1,7 +1,7 @@
 # Rancher-Download
 This read.me document presents the prerequisites and the different steps to install the Rancher platform. We focus here on the deployment in a cluster Kubernetes, recommended in production for high availability.
 
-## Prerequisite
+## Prerequisites
 * A working kubernetes cluster. This must include 3 linux nodes,
 preference of virtual machines. Each of the nodes must have a
 ETCD database and a control plane, so form a cluster of 3
@@ -80,6 +80,7 @@ sudo nginx -s reload -t
 ```
 
 ## Install Rancher
+
 If all the prerequisites have been met, installing Rancher is a formality. You
 you will need to import the helm directory containing the rancher installation charts,
 install a certificate manager and finally start the installation by specifying as

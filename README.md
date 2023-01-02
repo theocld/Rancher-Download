@@ -72,8 +72,7 @@ proxy_pass rancher_servers_https;
 
 * Copy nginx.conf file to /etc/nginx/ folder
 
-* Charger les mises à jour en relançant le service nginx. Exécuter ces
-commandes dans le terminal :
+* Load updates by restarting the nginx service. Run these commands in the terminal:
 ```bash
 sudo service nginx restart
 sudo nginx -s reload -t

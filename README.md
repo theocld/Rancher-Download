@@ -49,9 +49,9 @@ worker_connections 8192;
 stream {
 upstream rancher_servers_http {
 least_conn;
-server &lt;IP_NODE_1&gt;:80 max_fails=3 fail_timeout=5s;
-server &lt;IP_NODE_2&gt;:80 max_fails=3 fail_timeout=5s;
-server &lt;IP_NODE_3&gt;:80 max_fails=3 fail_timeout=5s;
+server <IP_NODE_1>:80 max_fails=3 fail_timeout=5s;
+server <IP_NODE_2>:80 max_fails=3 fail_timeout=5s;
+server <IP_NODE_3>:80 max_fails=3 fail_timeout=5s;
 }
 server {
 listen 80;
@@ -59,9 +59,9 @@ proxy_pass rancher_servers_http;
 }
 upstream rancher_servers_https {
 least_conn;
-server &lt;IP_NODE_1&gt;:443 max_fails=3 fail_timeout=5s;
-server &lt;IP_NODE_2&gt;:443 max_fails=3 fail_timeout=5s;
-server &lt;IP_NODE_3&gt;:443 max_fails=3 fail_timeout=5s;
+server <IP_NODE_1>:443 max_fails=3 fail_timeout=5s;
+server <IP_NODE_2>:443 max_fails=3 fail_timeout=5s;
+server <IP_NODE_3>:443 max_fails=3 fail_timeout=5s;
 }
 server {
 listen 443;
